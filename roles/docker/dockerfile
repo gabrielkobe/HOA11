@@ -1,0 +1,15 @@
+FROM ubuntu
+MAINTAINER gabriel <qgkcsablan@tip.edu.ph>
+
+#skip prompts
+ARG DEBIAN_FRONTEND=noninteractive
+
+#update packages
+run apt update; apt dist-upgrade -y
+
+#install packages
+RUN apt install mariadb-server 
+RUN apy install mariadb-client
+
+#set entrypoint
+ENTRYPOINT apache2ctl -D FOREGROUND

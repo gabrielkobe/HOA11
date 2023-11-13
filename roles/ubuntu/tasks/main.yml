@@ -1,0 +1,13 @@
+- name: install Docker
+  apt: 
+    name: docker
+    state: latest
+    update_cache: yes
+
+- name: start and enable Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  when: ansible_distribution == "Ubuntu"
+    

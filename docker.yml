@@ -1,0 +1,35 @@
+---
+
+- hosts: all
+  become: true 
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+      state: absent
+      autoremove: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      state: absent
+      autoremove: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: ubuntu
+  become: true
+  roles:
+    - name: ubuntu
+
+- hosts: ubuntu
+  become: true
+  roles:
+    - name: docker
+
+- hosts: centos
+  become: true
+  roles:
+    - name: centos
+
